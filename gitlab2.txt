@@ -1,0 +1,13 @@
+before_script:
+- eval "$(ssh-agent -s)"
+- ssh-add <(echo "$SSH_PRIVATE_KEY")
+
+stages:
+- test
+
+deploy:
+  stage: test
+  script:
+  - ssh -o StrictHostKeyChecking=no root@178.128.82.26 "cd /var/www/$PROJECT && git pull origin master"
+
+

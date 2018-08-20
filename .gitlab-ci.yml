@@ -1,0 +1,11 @@
+before_script:
+- eval "$(ssh-agent -s)"
+- ssh-add <(echo "$SSH_PRIVATE_KEY")
+stages:
+- test
+
+deploy:
+  stage: test
+  script:
+    - ssh -o StrictHostKeyChecking=no root@178.128.216.238 "cd /var/www/ && git clone $LINK && cd $PROJECT && sed -i "s/PROJECT/$PROJECT/" scripts.ssh && sed -i "s/DATABASEPASSWORD/$DATABASEPASSWORD/" scripts.ssh && sed -i "s/DOMAIN/$DOMAIN/" scripts.ssh && sh scripts.ssh"
+  

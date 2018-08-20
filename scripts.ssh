@@ -1,0 +1,67 @@
+#!/bin/bash
+
+cp wp-config-sample.php wp-config.php
+
+sed -i 's/database_name_here/PROJECT/' wp-config.php
+sed -i 's/username_here/root/' wp-config.php
+sed -i 's/password_here/DATABASEPASSWORD/' wp-config.php
+
+mysql -uroot -pDATABASEPASSWORD -e "CREATE DATABASE PROJECT"
+
+echo "define('WP_MEMORY_LIMIT', '256M');
+define('WP_MAX_MEMORY_LIMIT', '512M');
+define('FS_METHOD', 'direct');" >> wp-config.php
+
+touch .htaccess
+
+echo "<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access 1 year"
+  ExpiresByType image/jpeg "access 1 year"
+  ExpiresByType image/gif "access 1 year"
+  ExpiresByType image/png "access 1 year"
+  ExpiresByType text/css "access 1 month"
+  ExpiresByType text/html "access 1 month"
+  ExpiresByType application/pdf "access 1 month"
+  ExpiresByType text/x-javascript "access 1 month"
+  ExpiresByType image/x-icon "access 1 year"
+  ExpiresDefault "access 1 month"
+</IfModule>" 
+php_value upload_max_filesize 1000M
+php_value post_max_size 2000M
+php_value memory_limit 3000M
+php_value max_execution_time 180
+php_value max_input_time 180 >> .htaccess
+
+sudo chown www-data:root /var/www/PROJECT
+
+cd /etc/apache2/sites-enabled/
+touch DOMAIN.conf
+echo '
+<VirtualHost *:80>
+    ServerName 'DOMAIN'
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/'PROJECT'
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    <Directory /var/www/'PROJECT'>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>' >DOMAIN.conf
+
+sudo service apache2 restart
+sudo echo gitlab2.txt > .gitlab-ci.yml
+sudo git add .
+sudo git commit -m"first commit"
+sudo git push origin master 

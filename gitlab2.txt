@@ -8,6 +8,6 @@ stages:
 deploy:
   stage: test
   script:
-  - ssh -o StrictHostKeyChecking=no root@178.128.82.26 "cd /var/www/$PROJECT && git pull origin master"
+  - ssh -o StrictHostKeyChecking=no root@178.128.216.238 "cd /var/www/$PROJECT && git pull origin master"
 
 

@@ -35,12 +35,12 @@ RewriteRule . /index.php [L]
   ExpiresByType text/x-javascript "access 1 month"
   ExpiresByType image/x-icon "access 1 year"
   ExpiresDefault "access 1 month"
-</IfModule>" 
+</IfModule>
 php_value upload_max_filesize 1000M
 php_value post_max_size 2000M
 php_value memory_limit 3000M
 php_value max_execution_time 180
-php_value max_input_time 180 >> .htaccess
+php_value max_input_time 180" >> .htaccess
 
 sudo chown www-data:root /var/www/PROJECT
 

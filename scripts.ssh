@@ -62,6 +62,8 @@ echo '
 
 sudo service apache2 restart
 sudo echo gitlab2.txt > .gitlab-ci.yml
+cd /var/www/PROJECT/
+git config --global user.email "vubuivn@gmail.com"
 sudo git add .
 sudo git commit -m"first commit"
 sudo git push origin master 

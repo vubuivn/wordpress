@@ -61,7 +61,7 @@ echo '
 </VirtualHost>' >DOMAIN.conf
 
 sudo service apache2 restart
-sudo echo gitlab2.txt > .gitlab-ci.yml
+sudo cat gitlab2.txt > .gitlab-ci.yml
 cd /var/www/PROJECT/
 git config --global user.email "vubuivn@gmail.com"
 sudo git add .

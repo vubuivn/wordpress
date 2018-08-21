@@ -45,7 +45,7 @@ php_value max_input_time 180" >> .htaccess
 sudo chown -R www-data:root /var/www/PROJECT
 
 cd /etc/apache2/sites-enabled/
-touch DOMAIN.conf
+touch PROJECT.conf
 echo '
 <VirtualHost *:80>
     ServerName 'DOMAIN'
@@ -58,7 +58,7 @@ echo '
         AllowOverride All
         Require all granted
     </Directory>
-</VirtualHost>' >DOMAIN.conf
+</VirtualHost>' >PROJECT.conf
 
 sudo service apache2 restart
 cd /var/www/PROJECT/

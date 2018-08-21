@@ -6,7 +6,7 @@ sed -i 's/database_name_here/PROJECT/' wp-config.php
 sed -i 's/username_here/root/' wp-config.php
 sed -i 's/password_here/DATABASEPASSWORD/' wp-config.php
 
-mysql -uroot -pDATABASEPASSWORD -e "CREATE DATABASE 'PROJECT'"
+mysql -uroot -pDATABASEPASSWORD -e "CREATE DATABASE PROJECT"
 
 echo "define('WP_MEMORY_LIMIT', '256M');
 define('WP_MAX_MEMORY_LIMIT', '512M');

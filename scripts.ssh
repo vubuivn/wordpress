@@ -64,6 +64,9 @@ sudo service apache2 restart
 cd /var/www/PROJECT/
 sudo cat gitlab2.txt > .gitlab-ci.yml
 git config --global user.email "vubuivn@gmail.com"
-sudo git add .
+sudo git add .gitignore
 sudo git commit -m"first commit"
+sudo git add .
+sudo git commit -m"push code"
 sudo git push origin master 
+sudo rm scripts.ssh

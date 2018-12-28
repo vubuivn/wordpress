@@ -7,5 +7,5 @@ stages:
 deploy:
   stage: test
   script:
-    - ssh -o StrictHostKeyChecking=no root@178.128.216.238 "cd /var/www/ && git clone $LINK && cd $PROJECT && sed -i "s/PROJECT/$PROJECT/" scripts.ssh && sed -i "s/DATABASEPASSWORD/$DATABASEPASSWORD/" scripts.ssh && sed -i "s/DOMAIN/$DOMAIN/" scripts.ssh && sh scripts.ssh"
+    - ssh -o StrictHostKeyChecking=no root@178.128.216.238 "cd /var/www/ && git clone $CI_PROJECT_URL && cd $CI_PROJECT_NAME && sed -i "s/PROJECT/$CI_PROJECT_NAME/" scripts.ssh && sed -i "s/DATABASEPASSWORD/$DATABASEPASSWORD/" scripts.ssh && sed -i "s/DOMAIN/$DOMAIN/" scripts.ssh && sh scripts.ssh"
   
